@@ -66,6 +66,7 @@
                 </v-row>
             </v-container>
         </v-main>
+        <loe-footer></loe-footer>
     </v-app>
 </template>
 <style scoped>
@@ -81,12 +82,14 @@
 </style>
 <script>
 import StylizedName from "./components/StylizedName";
+import LoeFooter from "./components/Footer";
 
 export default {
     name: "App",
 
     components: {
-        StylizedName,
+        LoeFooter,
+        StylizedName
     },
 
     data: () => ({

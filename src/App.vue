@@ -107,7 +107,7 @@ export default {
             );
         },
         extensionLink: function() {
-            return this.isEdge ? 'https://chrome.google.com/webstore/detail/loe/nielhlpokoneeolkilpbkafnaimmmmdc' : 'https://chrome.google.com/webstore/detail/loe/nielhlpokoneeolkilpbkafnaimmmmdc'
+            return this.isEdge ? 'https://microsoftedge.microsoft.com/addons/detail/ggpmndmjelbgjcjanbpdaiigfeacgbji' : 'https://chrome.google.com/webstore/detail/loe/nielhlpokoneeolkilpbkafnaimmmmdc'
         }
     },
 };

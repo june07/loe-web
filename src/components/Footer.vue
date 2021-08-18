@@ -41,7 +41,7 @@ export default {
         links: [
             { icon: "mdi-google-chrome", url: "https://chrome.google.com/webstore/detail/loe/nielhlpokoneeolkilpbkafnaimmmmdc" },
             { icon: "mdi-microsoft-edge", url: "" },
-            { icon: "mdi-electron-framework", url: "https://owncloud.june07.com/s/DMyKVB1v6WVGKYe" }
+            { icon: "mdi-electron-framework", url: "https://owncloud.june07.com/s/u2QW738GBPVLXpC" }
         ],
     }),
 };

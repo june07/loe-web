@@ -45,7 +45,7 @@
                                     <span v-bind:class="$vuetify.breakpoint.mobile ? 'font-weight-light' : ''" class="mobile-br">Amazon shopping,</span>
                                     <span class="font-weight-bold">Intelligently</span>
                                 </v-card-title>
-                                <v-card-text v-bind:class="$vuetify.breakpoint.mobile ? 'subtitle-2': 'subtitle-1'" class="my-8">Stop searching through your Amazon order history, guessing, or just plain giving up on being informed on what you previously paid for things.
+                                <v-card-text v-bind:class="$vuetify.breakpoint.mobile ? 'subtitle-2': 'subtitle-1'" class="my-8">Stop searching through your Amazon order history, guessing, or just plain giving up on being informed about what you previously paid for things.
                                     Instead let LOE do the work for you with it's intelligent algorithms, instantaneous data delivery, and smart UI.</v-card-text>
 
                                 <v-card-actions>

@@ -7,7 +7,7 @@ module.exports = {
         host: 'localdev.loe.june07.com',
         port: 443,
         https: {
-            crt: fs.readFileSync('localdev.crt'),
+            pfx: fs.readFileSync('20211114_90961a95.pfx'),
         },
     },
     configureWebpack: {

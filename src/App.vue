@@ -30,8 +30,8 @@
             <v-container fluid id="sheet1" class="pb-16">
                 <v-row>
                     <v-spacer></v-spacer>
-                    <v-col v-if="$vuetify.breakpoint.mobile" cols="12">
-                        <v-img src="https://res.cloudinary.com/june07/image/upload/v1629145980/shopping-cart-shopping-purchasing-candy-alpha_olfd3o.png">
+                    <v-col class="d-flex justify-center" v-if="$vuetify.breakpoint.mobile" cols="12">
+                        <v-img max-width="500" src="https://res.cloudinary.com/june07/image/upload/v1629145980/shopping-cart-shopping-purchasing-candy-alpha_olfd3o.png">
                         </v-img>
                     </v-col>
                     <v-col class="d-flex flex-column justify-center" :cols="$vuetify.breakpoint.mobile ? 12 : 5">
@@ -41,9 +41,9 @@
                                     class="ml-8"
                                     outlined>
 
-                                <v-card-title  v-bind:class="$vuetify.breakpoint.mobile ? 'text-h5' : 'text-h1'" class="mb-1">
-                                    <span v-bind:class="$vuetify.breakpoint.mobile ? 'font-weight-light' : ''" class="mobile-br">Amazon shopping,</span>
-                                    <span class="font-weight-bold">Intelligently</span>
+                                <v-card-title class="mb-1 text-sm-h5 text-md-h3 text-lg-h1">
+                                    <span v-bind:class="$vuetify.breakpoint.mobile ? 'font-weight-light' : ''" class="mobile-br nowrap">Amazon shopping,</span>
+                                    <span class="font-weight-bold nowrap">Intelligently</span>
                                 </v-card-title>
                                 <v-card-text v-bind:class="$vuetify.breakpoint.mobile ? 'subtitle-2': 'subtitle-1'" class="my-8">Stop searching through your Amazon order history, guessing, or just plain giving up on being informed about what you previously paid for things.
                                     Instead let LOE do the work for you with it's intelligent algorithms, instantaneous data delivery, and smart UI.</v-card-text>
@@ -78,6 +78,9 @@
 }
 .mobile-br {
     width: 100%
+}
+.nowrap {
+    white-space: nowrap;
 }
 </style>
 <script>

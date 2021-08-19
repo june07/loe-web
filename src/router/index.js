@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from '../App.vue'
+import { authGuard } from "../auth";
 
 Vue.use(VueRouter)
 
 const routes = [
 	{
 		meta: {
-			title: 'LOE Home',
+			title: 'LOE Web - Home',
 			metaTags: [
 				{
 					name: 'description',
@@ -17,15 +17,25 @@ const routes = [
 		},
 		path: '/',
 		name: 'Home',
-		component: App,
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
 	},
 	{
-		path: '/about',
-		name: 'About',
+        meta: {
+			title: 'LOE Web - Account',
+			metaTags: [
+				{
+					name: 'description',
+					content: '≤ LOE by June07 - Your Account Page.',
+				},
+			],
+		},
+		path: '/account',
+		name: 'Account',
 		// route level code-splitting
 		// this generates a separate chunk (about.[hash].js) for this route
 		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+		component: () => import(/* webpackChunkName: "about" */ '../views/Account.vue'),
+        beforeEnter: authGuard
 	},
 ]
 

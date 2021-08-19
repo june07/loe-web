@@ -98,7 +98,7 @@ export default {
     mounted() {},
     computed: {
         isEdge: function () {
-            return this.isChrome && navigator.userAgent.indexOf("Edg") != -1;
+            return !!window.chrome && navigator.userAgent.indexOf("Edg") != -1;
         },
         isChrome: function () {
             return (

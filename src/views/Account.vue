@@ -38,6 +38,11 @@
         </v-row>
     </v-container>
 </template>
+<style>
+.v-application--wrap {
+    min-height: unset !important;
+}
+</style>
 <script>
 import io from "socket.io-client";
 

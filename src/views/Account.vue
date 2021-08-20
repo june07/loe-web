@@ -1,7 +1,7 @@
 <template>
     <v-container id="account">
         <v-row>
-            <v-col cols="3">
+            <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 3">
                 <v-card shaped>
                     <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right">mdi-receipt</v-icon>
                     <v-card-title>Invoices</v-card-title>
@@ -18,7 +18,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="3">
+            <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 3">
                 <v-card shaped>
                     <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right">mdi-api</v-icon>
                     <v-card-title>API Calls</v-card-title>

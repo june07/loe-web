@@ -20,7 +20,7 @@
                 </v-btn>
             </v-card-text>
 
-            <v-card-text class="white--text pt-0" style="margin: auto; width: 50%">
+            <v-card-text class="white--text pt-0" style="margin: auto" v-bind:style="{ width: $vuetify.breakpoint.mobile ? '100%' : '50%', fontSize: $vuetify.breakpoint.mobile ? 'xx-small' : '' }">
                 Like all browser extensions, LOE can read and change a limited amount of data in your browser. We only read the page for Amazon's sites so that we can deliver relevant data to you including prior prices paid for items. We take your privacy very seriously and you can read more about it in our <a style="color: white" href="https://june07.com/privacy">Privacy Policy</a>
             </v-card-text>
 

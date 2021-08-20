@@ -1,7 +1,6 @@
 <template>
     <v-app>
-        <v-app-bar
-                   app
+        <v-toolbar
                    color="amber lighten-2"
                    flat>
             <div class="d-flex align-center">
@@ -25,7 +24,7 @@
                 <stylized-name class="ml-2"></stylized-name>
             </div>
             <v-spacer />
-            <v-menu v-if="$auth.isAuthenticated" left offset-x nudge-left="20px" nudge-top="0px">
+            <v-menu v-if="$auth.isAuthenticated" left :offset-x="!$vuetify.breakpoint.mobile" :offset-y="$vuetify.breakpoint.mobile" :nudge-left="$vuetify.breakpoint.mobile ? 0 : '20px'" nudge-top="0px">
                 <template v-slot:activator="{ on, attrs }">
                     <sup class="font-weight-light text-h4 login-icon"
                         v-bind="attrs"
@@ -39,7 +38,7 @@
                 </v-list>
             </v-menu>
             <a v-if="!$auth.isAuthenticated" @click="login" class="link font-weight-light text-h4"><sup>></sup></a>
-        </v-app-bar>
+        </v-toolbar>
 
         <v-main>
             <v-container fluid id="sheet1" class="pb-16">

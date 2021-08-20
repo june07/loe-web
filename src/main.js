@@ -6,6 +6,7 @@ import router from './router'
 import { Auth0Plugin } from './auth'
 import { domain, clientId, audience } from '../auth_config.json'
 import store from './store'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 

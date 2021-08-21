@@ -36,6 +36,7 @@
                 </v-card>
             </v-col>
         </v-row>
+        parsedUrl: [{{ parsedUrl }}]
     </v-container>
 </template>
 <style>
@@ -52,6 +53,7 @@ export default {
     data() {
         return {
             socket: null,
+            parsedUrl: null
         };
     },
     computed: {
@@ -103,17 +105,17 @@ export default {
             }
             this.pwaInstall();
             window.addEventListener("DOMContentLoaded", () => {
-                const parsedUrl = new URL(window.location);
+                this.parsedUrl = new URL(window.location);
                 // searchParams.get() will properly handle decoding the values.
                 console.log(
-                    "Title shared: " + parsedUrl.searchParams.get("title")
+                    "Title shared: " + this.parsedUrl.searchParams.get("title")
                 );
                 console.log(
-                    "Text shared: " + parsedUrl.searchParams.get("text")
+                    "Text shared: " + this.parsedUrl.searchParams.get("text")
                 );
-                console.log("URL shared: " + parsedUrl.searchParams.get("url"));
+                console.log("URL shared: " + this.parsedUrl.searchParams.get("url"));
                 window.alert(
-                    "URL shared: " + parsedUrl.searchParams.get("url")
+                    "URL shared: " + this.parsedUrl.searchParams.get("url")
                 );
             });
         },

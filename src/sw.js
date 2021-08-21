@@ -15,4 +15,4 @@ const shareTargetHandler = async ({ event }) => {
 	return Response.redirect('/', 303)
 }
 
-registerRoute('/_share-target', shareTargetHandler, 'GET')
+registerRoute('/account', shareTargetHandler, 'GET')

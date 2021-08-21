@@ -5,10 +5,45 @@
                 <v-card shaped>
                     <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right"></v-icon>
                     <v-card-title></v-card-title>
-                    <v-card-subtitle></v-card-subtitle>
+                    <v-card-subtitle>{{ asin }}</v-card-subtitle>
                     <v-card-text>
-                        {{ asin }}
-                        {{ item }}
+                        <v-row>
+                            <v-col>
+                                <span>{{ item.description }}</span>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Lowest Paid</v-col>
+                            <v-col cols="4" class="py-0">
+                                <v-chip
+                                        small
+                                        color="green"
+                                        text-color="white">
+                                    <span class="subtitle-1 font-weight-light">{{ d3Format(item.lowestPaid) }}</span>
+                                </v-chip>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Highest Paid</v-col>
+                            <v-col cols="4" class="py-0">
+                                <v-chip
+                                        small
+                                        color="red"
+                                        text-color="white">
+                                    <span class="subtitle-1 font-weight-light">{{ d3Format(item.highestPaid) }}</span>
+                                </v-chip>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col class="py-0">
+                                Purchased <v-chip>{{ item.totalCount }}</v-chip> times.
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col class="py-0">
+                                Most purchased at once <v-chip>{{ item.highestCount }}</v-chip>.
+                            </v-col>
+                        </v-row>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -56,6 +91,12 @@
 </style>
 <script>
 import io from "socket.io-client";
+import { debounce } from "lodash";
+import { format } from "d3-format";
+
+const amazonProductRegexp = new RegExp(
+    /https?:\/\/(smile|www)\.amazon\.com\/([\w-]+\/)?(?:dp\/|gp\/)(?:product\/)?(\w+\/)?(\w{10})/i
+);
 
 export default {
     name: "Account",
@@ -63,11 +104,11 @@ export default {
     data() {
         return {
             socket: null,
-            parsedUrl: null
+            parsedUrl: null,
         };
     },
     computed: {
-        item: function() {
+        item: function () {
             return this.$store.state.item;
         },
         stats: function () {
@@ -85,14 +126,35 @@ export default {
         showInstallPromotion: function () {
             return this.$store.state.showInstallPromotion;
         },
-        asin: function() {
-            console.log('asin')
-            if (!this.parsedUrl) return null
-            let parsed = decodeURIComponent(this.parsedUrl.searchParams.get('text'))
-            parsed = parsed && parsed.match(/(\w{10})/)
-            if (parsed.length > 0) return parsed[1]
-            return null
-        }
+        asin: function () {
+            if (!this.parsedUrl) return null;
+            let match = this.parsedUrl.searchParams
+                .get("text")
+                .match(/(.*)(https:\/\/.*$)/);
+            if (!match) return null;
+            //const description = match[1].trim()
+            const url = match[2].trim();
+            const asin = url.match(amazonProductRegexp)[4];
+            return asin;
+        },
+    },
+    watch: {
+        asin: function (newAsin, oldAsin) {
+            if (newAsin !== oldAsin) {
+                this.getItem();
+                this.debouncedGetItem();
+            }
+        },
+    },
+    created: function () {
+        // _.debounce is a function provided by lodash to limit how
+        // often a particularly expensive operation can be run.
+        // In this case, we want to limit how often we access
+        // yesno.wtf/api, waiting until the user has completely
+        // finished typing before making the ajax request. To learn
+        // more about the _.debounce function (and its cousin
+        // _.throttle), visit: https://lodash.com/docs#debounce
+        this.debouncedGetItem = debounce(this.getItem, 500);
     },
     mounted() {
         let token;
@@ -158,6 +220,9 @@ export default {
                 console.log("PWA was installed");
             });
         },
+        d3Format(value) {
+            return format("$.2f")(value)
+        },
         getItem() {
             this.socket.emit(
                 "item",
@@ -167,8 +232,7 @@ export default {
                         .map((receipt) => receipt.items[0])
                         .reduce(
                             (acc, cur) => {
-                                if (!acc.lowestPaid)
-                                    acc.lowestPaid = cur.price;
+                                if (!acc.lowestPaid) acc.lowestPaid = cur.price;
                                 else if (acc.lowestPaid > cur.price)
                                     acc.lowestPaid = cur.price;
                                 if (acc.highestPaid < cur.price)
@@ -189,7 +253,7 @@ export default {
                     this.$store.commit({ type: "set", item });
                 }
             );
-        }
+        },
     },
 };
 </script>

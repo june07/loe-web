@@ -16,5 +16,14 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "start_url": "https://loe.june07.com",
-    "display": "standalone"
+    "display": "standalone",
+    "share_target": {
+        "action": "/account",
+        "method": "GET",
+        "params": {
+          "title": "title",
+          "text": "text",
+          "url": "url"
+        }
+      }
 }

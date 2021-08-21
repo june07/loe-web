@@ -51,7 +51,7 @@ export default {
     components: {},
     data() {
         return {
-            socket: null
+            socket: null,
         };
     },
     computed: {
@@ -64,12 +64,12 @@ export default {
                 apiCalls: 500,
             };
         },
-        deferredPrompt: function() {
-            return this.$store.state.deferredPrompt
+        deferredPrompt: function () {
+            return this.$store.state.deferredPrompt;
         },
-        showInstallPromotion: function() {
-            return this.$store.state.showInstallPromotion
-        }
+        showInstallPromotion: function () {
+            return this.$store.state.showInstallPromotion;
+        },
     },
     mounted() {
         let token;
@@ -112,6 +112,9 @@ export default {
                     "Text shared: " + parsedUrl.searchParams.get("text")
                 );
                 console.log("URL shared: " + parsedUrl.searchParams.get("url"));
+                window.alert(
+                    "URL shared: " + parsedUrl.searchParams.get("url")
+                );
             });
         },
         percentage(value, max) {
@@ -135,13 +138,16 @@ export default {
             });
             window.addEventListener("appinstalled", () => {
                 // Hide the app-provided install promotion
-                this.$store.commit({ type: "set", showInstallPromotion: false });
+                this.$store.commit({
+                    type: "set",
+                    showInstallPromotion: false,
+                });
                 // Clear the deferredPrompt so it can be garbage collected
                 this.$store.commit({ type: "set", deferredPrompt: null });
                 // Optionally, send analytics event to indicate successful install
                 console.log("PWA was installed");
             });
-        }
+        },
     },
 };
 </script>

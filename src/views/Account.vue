@@ -2,7 +2,7 @@
     <v-container id="account">
         <v-row>
             <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 3">
-                <v-card v-show="item" shaped>
+                <v-card v-if="item" shaped>
                     <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right"></v-icon>
                     <v-card-title>Item</v-card-title>
                     <v-card-subtitle>{{ asin }}</v-card-subtitle>

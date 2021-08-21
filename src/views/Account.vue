@@ -3,6 +3,17 @@
         <v-row>
             <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 3">
                 <v-card shaped>
+                    <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right"></v-icon>
+                    <v-card-title></v-card-title>
+                    <v-card-subtitle></v-card-subtitle>
+                    <v-card-text>
+                        {{ asin }}
+                        {{ item }}
+                    </v-card-text>
+                </v-card>
+            </v-col>
+            <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 3">
+                <v-card shaped>
                     <v-icon x-large class="mt-4 mr-4" color="amber darken-2" style="float: right">mdi-receipt</v-icon>
                     <v-card-title>Invoices</v-card-title>
                     <v-card-subtitle>Total Amazon Invoices</v-card-subtitle>
@@ -36,7 +47,6 @@
                 </v-card>
             </v-col>
         </v-row>
-        parsedUrl: [{{ parsedUrl }}]
     </v-container>
 </template>
 <style>
@@ -57,6 +67,9 @@ export default {
         };
     },
     computed: {
+        item: function() {
+            return this.$store.state.item;
+        },
         stats: function () {
             return this.$store.state.stats;
         },
@@ -72,6 +85,12 @@ export default {
         showInstallPromotion: function () {
             return this.$store.state.showInstallPromotion;
         },
+        asin: function() {
+            if (!this.parsedUrl || !this.parsedUrl.text) return null
+            const parsed = decodeURIComponent(this.parsedUrl.text).match(/(\w{10})/)
+            if (parsed.length > 0) return parsed[1]
+            return null
+        }
     },
     mounted() {
         let token;
@@ -137,6 +156,38 @@ export default {
                 console.log("PWA was installed");
             });
         },
+        getItem() {
+            this.socket.emit(
+                "item",
+                { asin: this.asin },
+                async (itemPerReceipts) => {
+                    const item = itemPerReceipts
+                        .map((receipt) => receipt.items[0])
+                        .reduce(
+                            (acc, cur) => {
+                                if (!acc.lowestPaid)
+                                    acc.lowestPaid = cur.price;
+                                else if (acc.lowestPaid > cur.price)
+                                    acc.lowestPaid = cur.price;
+                                if (acc.highestPaid < cur.price)
+                                    acc.highestPaid = cur.price;
+                                if (acc.highestCount < cur.count)
+                                    acc.highestCount = cur.count;
+                                acc.totalCount += cur.count;
+                                acc.description = cur.description;
+                                return acc;
+                            },
+                            {
+                                lowestPaid: undefined,
+                                highestPaid: 0,
+                                highestCount: 1,
+                                totalCount: 0,
+                            }
+                        );
+                    this.$store.commit({ type: "set", item });
+                }
+            );
+        }
     },
 };
 </script>

@@ -86,6 +86,7 @@ export default {
             return this.$store.state.showInstallPromotion;
         },
         asin: function() {
+            console.log('asin')
             if (!this.parsedUrl || !this.parsedUrl.text) return null
             const parsed = decodeURIComponent(this.parsedUrl.text).match(/(\w{10})/)
             if (parsed.length > 0) return parsed[1]

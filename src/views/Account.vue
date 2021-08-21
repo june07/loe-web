@@ -87,8 +87,9 @@ export default {
         },
         asin: function() {
             console.log('asin')
-            if (!this.parsedUrl || !this.parsedUrl.text) return null
-            const parsed = decodeURIComponent(this.parsedUrl.text).match(/(\w{10})/)
+            if (!this.parsedUrl) return null
+            let parsed = decodeURIComponent(this.parsedUrl.searchParams.get('text'))
+            parsed = parsed && parsed.match(/(\w{10})/)
             if (parsed.length > 0) return parsed[1]
             return null
         }

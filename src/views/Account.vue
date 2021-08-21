@@ -9,28 +9,28 @@
                     <v-card-text>
                         <v-row>
                             <v-col>
-                                <span>{{ item.description }}</span>
+                                <span class="subtitle-1">{{ item.description }}</span>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Lowest Paid</v-col>
-                            <v-col cols="4" class="py-0">
+                            <v-col cols="4" class="py-0 px-0">
                                 <v-chip
                                         small
                                         color="green"
                                         text-color="white">
-                                    <span class="subtitle-1 font-weight-light">{{ d3Format(item.lowestPaid) }}</span>
+                                    <span class="subtitle-1 font-weight-bold">{{ d3Format(item.lowestPaid) }}</span>
                                 </v-chip>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Highest Paid</v-col>
-                            <v-col cols="4" class="py-0">
+                            <v-col cols="4" class="py-0 px-0">
                                 <v-chip
                                         small
                                         color="red"
                                         text-color="white">
-                                    <span class="subtitle-1 font-weight-light">{{ d3Format(item.highestPaid) }}</span>
+                                    <span class="subtitle-1 font-weight-bold">{{ d3Format(item.highestPaid) }}</span>
                                 </v-chip>
                             </v-col>
                         </v-row>

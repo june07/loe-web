@@ -16,6 +16,8 @@ export default new Vuex.Store({
 			totalReceipts: null,
 			totalApiCalls: null,
 		},
+        deferredPrompt: null,
+        showInstallPromotion: null
 	},
 	mutations: {
 		set(state, payload) {

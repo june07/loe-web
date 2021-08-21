@@ -19,6 +19,7 @@
             </svg>
             <span>LOE Account</span>
         </v-toolbar-title>
+        <v-btn color="amber darken-2" class="mx-4" small outlined v-show="showInstallPromotion" @click="installPWA">Install App</v-btn>
 
         <v-spacer></v-spacer>
 
@@ -52,6 +53,14 @@ export default {
     data() {
         return {};
     },
+    computed: {
+        showInstallPromotion: function() {
+            return this.$store.state.showInstallPromotion
+        },
+        deferredPrompt: function() {
+            return this.$store.state.deferredPrompt
+        }
+    },
     methods: {
         login() {
             this.$auth.loginWithRedirect({
@@ -61,6 +70,18 @@ export default {
         logout() {
             this.$auth.logout();
             this.$router.push({ path: "/" });
+        },
+        async installPWA() {
+            // Hide the app provided install promotion
+            this.$store.commit({ type: "set", showInstallPromotion: false });
+            // Show the install prompt
+            this.deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            const { outcome } = await this.deferredPrompt.userChoice;
+            // Optionally, send analytics event with outcome of user choice
+            console.log(`User response to the install prompt: ${outcome}`);
+            // We've used the prompt, and can't use it again, throw it away
+            this.$store.commit({ type: "set", deferredPrompt: null });
         },
     },
 };

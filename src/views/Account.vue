@@ -51,7 +51,7 @@ export default {
     components: {},
     data() {
         return {
-            socket: null,
+            socket: null
         };
     },
     computed: {
@@ -64,6 +64,12 @@ export default {
                 apiCalls: 500,
             };
         },
+        deferredPrompt: function() {
+            return this.$store.state.deferredPrompt
+        },
+        showInstallPromotion: function() {
+            return this.$store.state.showInstallPromotion
+        }
     },
     mounted() {
         let token;
@@ -95,6 +101,7 @@ export default {
                     this.$store.commit({ type: "set", stats });
                 });
             }
+            this.pwaInstall();
             window.addEventListener("DOMContentLoaded", () => {
                 const parsedUrl = new URL(window.location);
                 // searchParams.get() will properly handle decoding the values.
@@ -115,6 +122,26 @@ export default {
                 receipts;
             });
         },
+        pwaInstall() {
+            window.addEventListener("beforeinstallprompt", (e) => {
+                // Prevent the mini-infobar from appearing on mobile
+                e.preventDefault();
+                // Stash the event so it can be triggered later.
+                this.deferredPrompt = e;
+                // Update UI notify the user they can install the PWA
+                this.$store.commit({ type: "set", showInstallPromotion: true });
+                // Optionally, send analytics event that PWA install promo was shown.
+                console.log(`'beforeinstallprompt' event was fired.`);
+            });
+            window.addEventListener("appinstalled", () => {
+                // Hide the app-provided install promotion
+                this.$store.commit({ type: "set", showInstallPromotion: false });
+                // Clear the deferredPrompt so it can be garbage collected
+                this.$store.commit({ type: "set", deferredPrompt: null });
+                // Optionally, send analytics event to indicate successful install
+                console.log("PWA was installed");
+            });
+        }
     },
 };
 </script>

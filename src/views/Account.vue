@@ -12,7 +12,7 @@
                                 <span class="subtitle-1">{{ item.description }}</span>
                             </v-col>
                         </v-row>
-                        <v-row>
+                        <v-row v-if="item.totalCount > 0">
                             <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Lowest Paid</v-col>
                             <v-col cols="4" class="py-0 px-0">
                                 <v-chip
@@ -23,7 +23,7 @@
                                 </v-chip>
                             </v-col>
                         </v-row>
-                        <v-row>
+                        <v-row v-if="item.totalCount > 0">
                             <v-col cols="8" class="subtitle-1 font-weight-bold text-uppercase py-0">Highest Paid</v-col>
                             <v-col cols="4" class="py-0 px-0">
                                 <v-chip
@@ -34,16 +34,19 @@
                                 </v-chip>
                             </v-col>
                         </v-row>
-                        <v-row>
+                        <v-row v-if="item.totalCount > 0">
                             <v-col class="py-0">
                                 Purchased <v-chip>{{ item.totalCount }}</v-chip> times.
                             </v-col>
                         </v-row>
-                        <v-row>
+                        <v-row v-if="item.totalCount > 0">
                             <v-col class="py-0">
                                 Most purchased at once <v-chip>{{ item.highestCount }}</v-chip>.
                             </v-col>
                         </v-row>
+                        <v-alert outline prominent type="info">
+                            No record of this purchase.
+                        </v-alert>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -221,7 +224,7 @@ export default {
             });
         },
         d3Format(value) {
-            return format("$.2f")(value)
+            return format("$.2f")(value);
         },
         getItem() {
             this.socket.emit(
@@ -233,6 +236,7 @@ export default {
                         .reduce(
                             (acc, cur) => {
                                 if (!acc.lowestPaid) acc.lowestPaid = cur.price;
+                                if (!acc.highestPaid) acc.highestPaid = cur.price;
                                 else if (acc.lowestPaid > cur.price)
                                     acc.lowestPaid = cur.price;
                                 if (acc.highestPaid < cur.price)
@@ -244,16 +248,17 @@ export default {
                                 return acc;
                             },
                             {
+                                asin: this.asin,
                                 lowestPaid: undefined,
-                                highestPaid: 0,
-                                highestCount: 1,
+                                highestPaid: undefined,
+                                highestCount: 0,
                                 totalCount: 0,
                             }
                         );
                     this.$store.commit({ type: "set", item });
                 }
             );
-        },
+        }
     },
 };
 </script>

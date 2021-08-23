@@ -27,8 +27,8 @@
             <v-menu v-if="$auth.isAuthenticated" left :offset-x="!$vuetify.breakpoint.mobile" :offset-y="$vuetify.breakpoint.mobile" :nudge-left="$vuetify.breakpoint.mobile ? 0 : '20px'" nudge-top="0px">
                 <template v-slot:activator="{ on, attrs }">
                     <sup class="font-weight-light text-h4 login-icon"
-                        v-bind="attrs"
-                           v-on="on">
+                         v-bind="attrs"
+                         v-on="on">
                         ≤
                     </sup>
                 </template>
@@ -49,35 +49,78 @@
                         </v-img>
                     </v-col>
                     <v-col class="d-flex flex-column justify-center" :cols="$vuetify.breakpoint.mobile ? 12 : 5">
-                        <template>
-                            <v-card
-                                    color="amber lighten-2"
-                                    class="ml-8"
-                                    outlined>
+                        <v-card
+                                color="amber lighten-2"
+                                class="ml-8"
+                                outlined>
 
-                                <v-card-title class="mb-1 text-sm-h5 text-md-h3 text-lg-h1">
-                                    <span v-bind:class="$vuetify.breakpoint.mobile ? 'font-weight-light' : ''" class="mobile-br nowrap">Amazon shopping,</span>
-                                    <span class="font-weight-bold nowrap">Intelligently</span>
-                                </v-card-title>
-                                <v-card-text v-bind:class="$vuetify.breakpoint.mobile ? 'subtitle-2': 'subtitle-1'" class="my-8">Stop searching through your Amazon order history, guessing, or just plain giving up on being informed about what you previously paid for things.
-                                    Instead let LOE do the work for you with it's intelligent algorithms, instantaneous data delivery, and smart UI.</v-card-text>
+                            <v-card-title class="mb-1 text-sm-h5 text-md-h3 text-lg-h1">
+                                <span v-bind:class="$vuetify.breakpoint.mobile ? 'font-weight-light' : ''" class="mobile-br nowrap">Amazon shopping,</span>
+                                <span class="font-weight-bold nowrap">Intelligently</span>
+                            </v-card-title>
+                            <v-card-text v-bind:class="$vuetify.breakpoint.mobile ? 'subtitle-2': 'subtitle-1'" class="my-8">Stop searching through your Amazon order history, guessing, or just plain giving up on being informed about what you previously paid for things.
+                                Instead let LOE do the work for you with it's intelligent algorithms, instantaneous data delivery, and smart UI.</v-card-text>
 
-                                <v-card-actions>
-                                    <v-btn x-large dark elevation="0"
-                                           :href="extensionLink"
-                                           color="amber darken-2"
-                                           class="px-8">
-                                        <span class="m">Add to {{ isEdge ? 'Edge' : 'Chrome' }} - It's Free</span>
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </template>
+                            <v-card-actions>
+                                <v-btn x-large dark elevation="0"
+                                       :href="extensionLink"
+                                       color="amber darken-2"
+                                       class="px-8">
+                                    <span class="m">Add to {{ isEdge ? 'Edge' : 'Chrome' }} - It's Free</span>
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
                     </v-col>
                     <v-col v-if="!$vuetify.breakpoint.mobile" cols="5">
                         <v-img src="https://res.cloudinary.com/june07/image/upload/v1629145980/shopping-cart-shopping-purchasing-candy-alpha_olfd3o.png">
                         </v-img>
                     </v-col>
                 </v-row>
+            </v-container>
+            <v-container fluid id="sheet2" class="pb-16">
+                <v-row>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 0 : 6" class="d-flex justify-center align-center">
+                    </v-col>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 6">
+                        <v-subheader class="justify-center">Chromium Browser Extension</v-subheader>
+                        <v-img class="justify-center" max-height="1080" contain src="img/screenshare-extensionExample.gif"></v-img>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 0 : 6" style="margin-top: -10%">
+                        <v-subheader class="justify-center">Quick Price History on Mobile App</v-subheader>
+                        <v-img class="justify-center" max-height="1080" contain src="img/screenshare-pwaExample.gif"></v-img>
+                    </v-col>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 6" class="d-flex justify-center align-start">
+                        <v-card color="amber accent-1" shaped class="mx-16 px-16" style="max-width: 70%">
+                            <v-card-title class="font-weight-light text-h4 justify-center mb-4">Chromium Browser Extension</v-card-title>
+                            <v-card-subtitle class="text-subtitle-2 justify-center">
+                                Available for all Chromium based browsers including Edge, Chrome, Opera, and more.
+                            </v-card-subtitle>
+                            <v-card-text class="text-body-1">
+                                The LOE browser extension is available at both <a href="">Google's Web Store</a> and <a href="https://microsoftedge.microsoft.com/addons/detail/loe/ggpmndmjelbgjcjanbpdaiigfeacgbji">Microsoft's Edge Add-ons</a>. It provides real-time Amazon shopping data from your prior purchase history.
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 12 : 6" class="d-flex justify-center align-start">
+                        <v-card color="amber accent-1" shaped class="mx-16 px-16" style="max-width: 60%">
+                            <v-card-title class="font-weight-light text-h4 justify-center mb-4">Mobile App</v-card-title>
+                            <v-card-subtitle class="text-subtitle-2">
+                                Shopping on Amazon Mobile is covered with our Mobile App
+                            </v-card-subtitle>
+                            <v-card-text class="text-body-1">
+                                <p></p>
+                                <p>The LOE Mobile App is installable when visiting your account portal from your mobile device. The mobile app makes it possible to use LOE when you're shopping from your mobile</p>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col :cols="$vuetify.breakpoint.mobile ? 0 : 6">
+                    </v-col>
+                </v-row>
+            </v-container>
+            <v-container fluid id="sheet3" class="pb-16">
             </v-container>
         </v-main>
         <loe-footer />
@@ -103,7 +146,7 @@
 .login-icon {
     position: absolute;
     top: 0;
-    right: 10px
+    right: 10px;
 }
 .menu-text {
     top: -14px;
@@ -128,7 +171,7 @@ export default {
     methods: {
         login() {
             this.$auth.loginWithRedirect({
-                appState: { targetUrl: "/account" }
+                appState: { targetUrl: "/account" },
             });
         },
         logout() {

@@ -44,7 +44,7 @@
                                 Most purchased at once <v-chip>{{ item.highestCount }}</v-chip>.
                             </v-col>
                         </v-row>
-                        <v-alert outline prominent type="info" :style="$vuetify.breakpoint.mobile ? 'font-size: smaller' : ''">
+                        <v-alert v-if="item.totalCount == 0" outline prominent type="info" :style="$vuetify.breakpoint.mobile ? 'font-size: smaller' : ''">
                             No record of this purchase.
                         </v-alert>
                     </v-card-text>

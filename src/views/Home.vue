@@ -102,7 +102,7 @@
                 <v-row>
                     <v-col :cols="$vuetify.breakpoint.mobile ? 0 : 6" style="margin-top: -10%">
                         <v-subheader class="justify-center">Quick Price History on Mobile App</v-subheader>
-                        <v-img class="justify-center" max-height="1080" contain src="img/screenshare-pwaExample.gif"></v-img>
+                        <v-img class="justify-center" max-height="1080" contain src="img/screenshare-pwaExample-wide.gif"></v-img>
                     </v-col>
                     <!-- mobile has this duplicated in the same row -->
                     <v-col v-if="!$vuetify.breakpoint.mobile" cols="6" class="d-flex justify-center align-start">

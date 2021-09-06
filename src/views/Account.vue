@@ -120,7 +120,7 @@ export default {
         accountLimits: function () {
             return {
                 receipts: 1000, // eventually get this based on the user's subscription level
-                apiCalls: 500,
+                apiCalls: 1000,
             };
         },
         deferredPrompt: function () {

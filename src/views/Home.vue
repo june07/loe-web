@@ -151,7 +151,99 @@
                     <!-- mobile has this duplicated in the same row -->
                 </v-row>
             </v-container>
-            <v-container fluid id="sheet3" class="pb-16">
+            <v-container fluid id="sheet3" class="pb-16 d-flex justify-center">
+                <v-carousel height="1080" :show-arrows="false">
+                    <v-carousel-item
+                        v-for="(item,i) in items"
+                        :key="i">
+                            <v-row>
+                                <v-col class="text-h5 d-flex justify-center my-5">
+                                    {{ item.title }}
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <v-img height="800" contain :src="item.src"></v-img>
+                                </v-col>
+                            </v-row>
+                    </v-carousel-item>
+                </v-carousel>
+                <!--<v-stepper v-model="e1" width="70%">
+                    <v-stepper-header>
+                        <v-stepper-step
+                                        :complete="e1 > 1"
+                                        step="1">
+                            Down
+                        </v-stepper-step>
+
+                        <v-divider></v-divider>
+
+                        <v-stepper-step
+                                        :complete="e1 > 2"
+                                        step="2">
+                            Name of step 2
+                        </v-stepper-step>
+
+                        <v-divider></v-divider>
+
+                        <v-stepper-step step="3">
+                            Name of step 3
+                        </v-stepper-step>
+                    </v-stepper-header>
+
+                    <v-stepper-items>
+                        <v-stepper-content step="1">
+                            <v-card
+                                    class="mb-12"
+                                    color="grey lighten-1"
+                                    height="200px"></v-card>
+
+                            <v-btn
+                                   color="primary"
+                                   @click="e1 = 2">
+                                Continue
+                            </v-btn>
+
+                            <v-btn text>
+                                Cancel
+                            </v-btn>
+                        </v-stepper-content>
+
+                        <v-stepper-content step="2">
+                            <v-card
+                                    class="mb-12"
+                                    color="grey lighten-1"
+                                    height="200px"></v-card>
+
+                            <v-btn
+                                   color="primary"
+                                   @click="e1 = 3">
+                                Continue
+                            </v-btn>
+
+                            <v-btn text>
+                                Cancel
+                            </v-btn>
+                        </v-stepper-content>
+
+                        <v-stepper-content step="3">
+                            <v-card
+                                    class="mb-12"
+                                    color="grey lighten-1"
+                                    height="200px"></v-card>
+
+                            <v-btn
+                                   color="primary"
+                                   @click="e1 = 1">
+                                Continue
+                            </v-btn>
+
+                            <v-btn text>
+                                Cancel
+                            </v-btn>
+                        </v-stepper-content>
+                    </v-stepper-items>
+                </v-stepper>-->
             </v-container>
         </v-main>
         <loe-footer />
@@ -159,6 +251,9 @@
 </template>
 <style scoped>
 #sheet1 {
+    background-color: #ffd54f;
+}
+#sheet3 {
     background-color: #ffd54f;
 }
 .v-btn {
@@ -197,7 +292,9 @@ export default {
     },
 
     data: () => ({
-        //
+        items: [
+            { title: 'Installing on Windows', src: 'img/windowsInstall.gif' }
+        ]
     }),
     methods: {
         login() {

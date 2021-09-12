@@ -144,7 +144,6 @@ export default {
     watch: {
         asin: function (newAsin, oldAsin) {
             if (newAsin !== oldAsin) {
-                this.getItem();
                 this.debouncedGetItem();
             }
         },

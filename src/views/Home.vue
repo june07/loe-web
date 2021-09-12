@@ -93,7 +93,7 @@
                                 Available for all Chromium based browsers including Edge, Chrome, Opera, and more.
                             </v-card-subtitle>
                             <v-card-text class="text-body-1">
-                                The LOE browser extension is available at both <a href="">Google's Web Store</a> and <a href="https://microsoftedge.microsoft.com/addons/detail/loe/ggpmndmjelbgjcjanbpdaiigfeacgbji">Microsoft's Edge Add-ons</a>. It provides real-time Amazon shopping data from your prior purchase history.
+                                The LOE browser extension is available at both <a href="https://chrome.google.com/webstore/detail/loe/nielhlpokoneeolkilpbkafnaimmmmdc">Google's Web Store</a> and <a href="https://microsoftedge.microsoft.com/addons/detail/loe/ggpmndmjelbgjcjanbpdaiigfeacgbji">Microsoft's Edge Add-ons</a>. It provides real-time Amazon shopping data from your prior purchase history.
                             </v-card-text>
                         </v-card>
                     </v-col>

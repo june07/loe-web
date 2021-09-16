@@ -166,7 +166,7 @@
                                     <a target="_blank" :href="item.youtube">
                                         <v-img height="800" contain :src="item.src"></v-img>
                                     </a>
-                                    <figcaption class="d-flex justify-center">(click image for a pausable <a class="mx-2" target="_blank" :href="item.youtube">YouTube</a> link)</figcaption>
+                                    <figcaption class="d-flex justify-center">(<b class="mr-2">Want to pause?</b> Click for <a class="mx-1" target="_blank" :href="item.youtube">YouTube</a> video)</figcaption>
                                 </v-col>
                             </v-row>
                     </v-carousel-item>

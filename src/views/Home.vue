@@ -152,18 +152,21 @@
                 </v-row>
             </v-container>
             <v-container fluid id="sheet3" class="pb-16 d-flex justify-center">
-                <v-carousel height="1080" :show-arrows="false">
+                <v-carousel height="1080" cycle>
                     <v-carousel-item
                         v-for="(item,i) in items"
                         :key="i">
                             <v-row>
                                 <v-col class="text-h5 d-flex justify-center my-5">
-                                    {{ item.title }}
+                                    <span v-html="item.title"></span>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col>
-                                    <v-img height="800" contain :src="item.src"></v-img>
+                                    <a target="_blank" :href="item.youtube">
+                                        <v-img height="800" contain :src="item.src"></v-img>
+                                    </a>
+                                    <figcaption class="d-flex justify-center">(click image for a pausable <a class="mx-2" target="_blank" :href="item.youtube">YouTube</a> link)</figcaption>
                                 </v-col>
                             </v-row>
                     </v-carousel-item>
@@ -293,7 +296,8 @@ export default {
 
     data: () => ({
         items: [
-            { title: 'Installing on Windows', src: 'img/windowsInstall.gif' }
+            { title: 'Installing on Windows', src: 'img/windowsInstall.gif', youtube: 'https://youtu.be/yRHUN1PRkrE' },
+            { title: 'Installing on Ubuntu Linux', src: 'img/UbuntuInstall.gif', youtube: 'https://youtu.be/R1BEobgdXdg' }
         ]
     }),
     methods: {
